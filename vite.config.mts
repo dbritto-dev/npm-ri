@@ -9,7 +9,7 @@ export default defineConfig({
       entry: resolve(__dirname, "src/index.ts"),
       name: "Injectors",
       fileName: "index",
-      formats: ["es", "umd"],
+      formats: ["cjs"],
     },
     outDir: "bin",
   },

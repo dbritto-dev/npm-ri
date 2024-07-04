@@ -2,11 +2,11 @@
   "name": "npm-ri",
   "private": false,
   "description": "npm install packages using regular expression",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Danilo Britto",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dbritto-dev/npm-ri.git"
+    "url": "git+https://github.com/dbritto-dev/npm-ri.git"
   },
   "source": "./src/index.ts",
   "main": "./dist/index.umd.js",
