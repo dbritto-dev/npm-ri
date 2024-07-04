@@ -11,5 +11,6 @@ export default defineConfig({
       fileName: "index",
       formats: ["es", "umd"],
     },
+    outDir: "bin",
   },
 });

@@ -24,6 +24,9 @@
   "files": [
     "bin"
   ],
+  "bin": {
+    "npm-ri": "bin/index.js"
+  },
   "scripts": {
     "build": "vite build",
     "check": "biome check ./src"

@@ -5,8 +5,7 @@
     "module": "esnext",
     "sourceMap": true,
     "esModuleInterop": true,
-    "moduleResolution": "bundler",
-    "outDir": "bin"
+    "moduleResolution": "bundler"
   },
   "include": ["src"]
 }
