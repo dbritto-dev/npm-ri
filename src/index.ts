@@ -27,7 +27,7 @@ async function run(regex: RegExp, { version }: { version: string }) {
         console.error("Something went wrong");
       }
 
-      process.exit(0);
+      process.exit(code);
     });
     return;
   }
