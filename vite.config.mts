@@ -1,15 +1,14 @@
 import { resolve } from "node:path";
 import { defineConfig } from "vite";
-import dts from "vite-plugin-dts";
 
 export default defineConfig({
-  plugins: [dts()],
   build: {
+    ssr: true,
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
-      name: "Injectors",
+      name: "npm-ri",
       fileName: "index",
-      formats: ["cjs"],
+      formats: ["es"],
     },
     outDir: "bin",
   },
