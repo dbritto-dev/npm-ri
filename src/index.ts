@@ -5,7 +5,7 @@ import { spawn } from "node:child_process";
 import { program } from "commander";
 
 function run(regex: RegExp, { version }: { version: string }) {
-  const require = createRequire(import.meta.url);
+  const require = createRequire(`${process.cwd()}/`);
   const pkg = require("./package.json");
 
   const dependencies = Object.keys(pkg.dependencies || {})
