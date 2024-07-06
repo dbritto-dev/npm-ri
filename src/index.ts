@@ -73,13 +73,21 @@ function run(
         return;
       }
 
-      throw new Error("Something went wrong");
+      program.error("Something went wrong");
     });
 
     return;
   }
 
-  throw new Error(
+  if (dryRun) {
+    console.warn(
+      `No packages found with the next regular expressions: ${dependencyNameRegex}`
+    );
+
+    return;
+  }
+
+  program.error(
     `No packages found with the next regular expressions: ${dependencyNameRegex}`
   );
 }
@@ -89,7 +97,7 @@ program
   .description(
     "npm install using regular expressions to update installed dependencies"
   )
-  .version("0.0.5");
+  .version("0.0.6");
 
 program
   .argument(
