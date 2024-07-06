@@ -4,7 +4,7 @@ npm install using regular expression to update installed packages
 
 # Usage
 
-## Basic (by default package version is "latest")
+## Basic (by default the dependency version is "latest")
 
 ```sh
 npx npm-ri "<dependecy-name-regex>"
@@ -19,13 +19,13 @@ npx npm-ri "@radix-ui/.*"
 ## With custom version
 
 ```sh
-npx npm-ri "<regex>" --dependency-version <dependency-version>
+npx npm-ri "<dependency-name-regex>" --dependency-version <dependency-version>
 ```
 
 or
 
 ```sh
-npx npm-ri "<regex>" -dv <dependency-version>
+npx npm-ri "<dependency-name-regex>" -dv <dependency-version>
 ```
 
 ### Example
