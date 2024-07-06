@@ -3,7 +3,7 @@
   "name": "npm-ri",
   "private": false,
   "description": "npm install packages using regular expression",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Danilo Britto",
   "repository": {
     "type": "git",
