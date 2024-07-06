@@ -4,7 +4,7 @@ import { createRequire } from "node:module";
 import { spawn } from "node:child_process";
 import { program } from "commander";
 
-async function run(regex: RegExp, { version }: { version: string }) {
+function run(regex: RegExp, { version }: { version: string }) {
   const require = createRequire(import.meta.url);
   const pkg = require("./package.json");
 
@@ -49,4 +49,4 @@ program
   )
   .action(run);
 
-program.parseAsync();
+program.parse();
