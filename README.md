@@ -1,13 +1,13 @@
 # npm-ri
 
-npm install using regular expression
+npm install using regular expression to update installed packages
 
 # Usage
 
-## Basic (by default version is "latest")
+## Basic (by default package version is "latest")
 
 ```sh
-npx npm-ri "<regex>"
+npx npm-ri "<dependecy-name-regex>"
 ```
 
 ### Example
@@ -19,11 +19,17 @@ npx npm-ri "@radix-ui/.*"
 ## With custom version
 
 ```sh
-npx npm-ri "<regex>" -v <version>
+npx npm-ri "<regex>" --dependency-version <dependency-version>
 ```
 
-### Example 
+or
 
 ```sh
-npx npm-ri "@tanstack/.*" -v beta
+npx npm-ri "<regex>" -dv <dependency-version>
+```
+
+### Example
+
+```sh
+npx npm-ri "@tanstack/.*" -dv beta
 ```
