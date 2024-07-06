@@ -5,33 +5,69 @@ import { createRequire } from "node:module";
 import { spawn } from "node:child_process";
 import { program } from "commander";
 
+function printDependenciesToUpdate(
+  title: string,
+  dependenciesToUpdate: [string, { current: string; next: string }][]
+) {
+  console.info(
+    `${title}:\n${dependenciesToUpdate
+      .map(
+        ([name, { current: currentVersion, next: nextVersion }]) =>
+          `${name}@${currentVersion} -> ${name}@${nextVersion}`
+      )
+      .join("\n")}`
+  );
+}
+
 function run(
   dependencyNameRegex: RegExp,
-  { dependencyVersion, dryRun }: { dependencyVersion: string; dryRun: boolean }
+  {
+    dependencyVersion: nextDependencyVersion,
+    dryRun,
+  }: { dependencyVersion: string; dryRun: boolean }
 ) {
   const require = createRequire(`${cwd()}/`);
   const pkg = require("./package.json");
 
-  const dependencies = Object.keys(pkg.dependencies || {})
-    .concat(Object.keys(pkg.devDependencies || {}))
-    .filter((dependency) => dependencyNameRegex.test(dependency))
-    .map((dependency) => `${dependency}@${dependencyVersion}`);
+  const dependenciesToUpdate = Object.entries(
+    Object.assign({}, pkg.dependencies || {}, pkg.devDependencies || {})
+  )
+    .filter(([dependencyName]) => dependencyNameRegex.test(dependencyName))
+    .map(
+      ([dependencyName, currentDependencyVersion]) =>
+        [
+          dependencyName,
+          {
+            current: currentDependencyVersion as string,
+            next: nextDependencyVersion as string,
+          },
+        ] as [string, { current: string; next: string }]
+    );
 
-  if (dependencies.length > 0) {
+  if (dependenciesToUpdate.length > 0) {
     if (dryRun) {
-      console.info(
-        `The next packages might be updated:\n${dependencies.join("\n")}`
+      printDependenciesToUpdate(
+        "The next packages might be updated",
+        dependenciesToUpdate
       );
 
       return;
     }
 
-    const npmInstall = spawn("npm", ["install"].concat(dependencies));
+    const npmInstall = spawn(
+      "npm",
+      ["install"].concat(
+        dependenciesToUpdate.map(
+          ([name, { next: nextVersion }]) => `${name}@${nextVersion}`
+        )
+      )
+    );
 
     npmInstall.on("close", (code: number) => {
       if (code === 0) {
-        console.info(
-          `The next packages were updated:\n${dependencies.join("\n")}`
+        printDependenciesToUpdate(
+          "The next packages were updated",
+          dependenciesToUpdate
         );
 
         return;
@@ -53,7 +89,7 @@ program
   .description(
     "npm install using regular expressions to update installed dependencies"
   )
-  .version("0.0.4");
+  .version("0.0.5");
 
 program
   .argument(
